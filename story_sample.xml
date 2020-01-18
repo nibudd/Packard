@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<story>
+	<page name="run into Bob">
+		Stepping into the hall, your right foot falls on uneven ground. You lift your foot to find a blue pen, which you pick up. As you straighten, the pen securely in your pocket, Bob rounds the corner.
+
+        <choice page="run into Bob">
+			Continue...
+			<variable name="blue_pen" set="1"/>
+</choice>
+	</page>
+
+	<page name="run into Bob">
+		"Don't mind me, I'm just retracing my steps, looking for my pen." Bob says as his eyes dart along the wide, poorly lit hallway. "Have you seen it?"
+
+		<choice page="Bob leaves">
+			(Offer Bob the pen you just found) "I think so. Is this it?"
+			<variable name="blue pen" set="0"/>
+			<variable name="kindness" increment="4"/>
+		</choice>
+
+        <choice page="Bob leaves">
+        	(Keep the pen you found for yourself, it's a pretty plain. Who knows to whom it belongs) "Sorry, Bob. I haven't seen it."
+        	<variable name="greed" increment="2"/>
+        </choice>
+	</page>
+
+	<page name="Bob leaves">
+		<fork>
+			<path>
+				"Thank you so much!" Bob says as he takes the pen from you.
+				<condition name="blue_pen" equal_to="0">
+			</path>
+			<path>
+				"Oh, bummer..." Bob says as he continues down the hall.
+				<condition name="blue_pen" equal_to="1">
+			</path>
+		</fork>
+
+		As you continue on to your office you feel a little bit <inline_fork name="feeling"/>. But anyway, you've got a lot of work waiting for you.
+
+		<referred_fork name="feeling">
+			<path>
+				better about the day ahead
+				<condition name="blue_pen" equal_to="0">
+			</path>
+			<path>
+				heavier - weighed down somehow
+				<condition name="blue_pen" equal_to="1">
+			</path>
+		</referred_fork>
+
+		<choice page="at your desk">
+			Make your way along the hall to your office.
+		</choice>
+	</page>
+
+</story>
