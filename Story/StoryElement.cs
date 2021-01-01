@@ -5,27 +5,23 @@ namespace Packard.Story
 {
     public class StoryElement
     {
-        public StoryElement(List<string> snippets, Func<StoryVariables, int>? evaluator)
+        public StoryElement(List<string> snippets) : this(snippets, new ElementEvaluator((StoryVariables _) => 0))
+        {
+        }
+
+        public StoryElement(List<string> snippets, ElementEvaluator evaluator)
         {
             Snippets = snippets;
-            
-            if (evaluator == null)
-            {
-                Evaluator = (StoryVariables _) => 0;
-            }
-            else
-            {
-                Evaluator = evaluator;
-            }
+            Evaluator = evaluator;
         }
 
         public List<string> Snippets { get; set; }
 
-        public Func<StoryVariables, int> Evaluator { get; set; }
+        public ElementEvaluator Evaluator { get; set; }
 
         public string Resolve(StoryVariables storyVariables)
         {
-            int index = Evaluator(storyVariables);
+            int index = Evaluator.Evaluate(storyVariables);
             return Snippets[index];
         }
     }
