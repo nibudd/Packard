@@ -2,16 +2,16 @@ using System;
 
 namespace Packard.Story
 {
-    public class ElementEvaluator
+    public class ElementEvaluator<T>
     {
-        public ElementEvaluator(Func<StoryVariables, int> evaluator)
+        public ElementEvaluator(Func<StoryVariables, T> evaluator)
         {
             Evaluator = evaluator;
         }
 
-        public Func<StoryVariables, int> Evaluator { get; set; }
+        public Func<StoryVariables, T> Evaluator { get; set; }
 
-        public int Evaluate(StoryVariables storyVariables)
+        public T Evaluate(StoryVariables storyVariables)
         {
             return Evaluator(storyVariables);
         }
