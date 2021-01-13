@@ -1,10 +1,11 @@
+using System;
 using System.Collections.ObjectModel;
 
 namespace Packard.Story
 {
     public class StoryChoice
     {
-        public StoryChoice(Collection<StoryElement> choiceElements, ElementEvaluator<bool> choiceEvaluator, StoryPage linkedPage)
+        public StoryChoice(Collection<StoryElement> choiceElements, Func<StoryVariables, bool> choiceEvaluator, StoryPage linkedPage)
         {
             ChoiceElements = choiceElements;
             ChoiceEvaluator = choiceEvaluator;
@@ -13,7 +14,7 @@ namespace Packard.Story
 
         public Collection<StoryElement> ChoiceElements { get; set; }
 
-        public ElementEvaluator<bool> ChoiceEvaluator { get; set; }
+        public Func<StoryVariables, bool> ChoiceEvaluator { get; set; }
 
         public StoryPage LinkedPage { get; set; }
     }
